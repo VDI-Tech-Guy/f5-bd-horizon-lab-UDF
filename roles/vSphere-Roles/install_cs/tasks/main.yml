@@ -1,0 +1,21 @@
+---
+# tasks file for Create-VM
+
+ - name: Reboot VMs
+   include: reboot_vm.yml
+   tags:
+     - install
+ - pause:
+     minutes: 2
+   tags:
+     - install
+
+ - name: Copy Files to Connection Servers 
+   include: cp_files.yml
+   tags:
+     - install
+
+ - name: Install Connection Server
+   include: install_cs.yml
+   tags:
+     - install

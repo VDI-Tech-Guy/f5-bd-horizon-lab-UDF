@@ -1,0 +1,12 @@
+vm_count: 3
+vm_hostname: "Lab-HZNCS-00"
+vm_template: "Server-2019-WinRM"
+vm_ip_address: 192.168.192.11
+vm_snapshot: "Ansible_Lab"
+my_domain_admin: "domain\\username"
+my_domain_password: "password"
+my_domain: "mydomain.local"
+is_linked_clone: yes
+cs_installer: '\\192.168.30.90\Apps\isos\VMware\Horizon Suite\Horizon\7.12\VMware-Horizon-Connection-Server-x86_64-7.12.0-15770369.exe'
+agent_installer: '\\192.168.30.90\Apps\isos\VMware\Horizon Suite\Horizon\7.12\VMware-Horizon-Agent-x86_64-7.12.0-15805436.exe'
+cs_installer_script: '\\192.168.30.90\Apps\isos\VMware\Horizon Suite\Horizon\scripts\install_horizon.cmd'

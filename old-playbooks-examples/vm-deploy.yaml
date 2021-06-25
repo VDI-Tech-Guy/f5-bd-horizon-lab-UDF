@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  vars_files:
+    - ../vars/active_directory.yml
+    - ../vars/vsphere.yml
+    - ../vars/network.yml
+  roles:
+    - roles/vSphere-Roles/create_resource_pool
+    - roles/vSphere-Roles/create_vm
+
+- hosts: dynamic_hosts
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/active_directory.yml
+    - ../vars/windows.yml
+  roles:
+    - role: roles/Horizon-Roles/install_horizon
+      when: 
+        - is_horizon_environment|bool
+

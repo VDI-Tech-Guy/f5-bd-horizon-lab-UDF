@@ -1,0 +1,24 @@
+---
+  - name: List All Logical Switches
+    nsxt_logical_switches_facts:
+      hostname: "{{ nsx_hostname }}"
+      username: "{{ nsx_username }}"
+      password: "{{ nsx_password }}"
+      validate_certs: "{{ nsx_validate_certs }}"
+    register: output
+
+  - name: Query Existing Switches on NSX-T
+    debug: msg="{{ output.results | json_query(query) }}"
+    vars: 
+      query: "[? display_name==`{{nsx_display_name}}`].display_name"
+    register: switches
+
+  - name: Set nsxt_segment_exists var to false
+    set_fact:
+      nsxt_segment_exists: false
+
+  - name: Does NSX-T Switch Exist?
+    set_fact:
+      nsxt_segment_exists: true 
+    when: switches.msg[0] is defined and switches.msg[0] == nsx_display_name 
+

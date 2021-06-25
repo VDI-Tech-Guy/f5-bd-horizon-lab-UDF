@@ -1,0 +1,23 @@
+---
+- hosts: all 
+  connection: network_cli
+  remote_user: admin
+  become: yes
+  become_method: enable
+  vars_files:
+    - vars/eos.yml
+    - vars/vlan_vars.yml
+  roles:
+    - roles/Arista-Roles/create_interface_vlan
+    - roles/Arista-Roles/add_ip_helper
+    - roles/Arista-Roles/create_vlans
+    - roles/Arista-Roles/save_config
+
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  vars_files:
+    - vars/vsphere.yml
+    - vars/vlan_vars.yml
+  roles:
+    - roles/vSphere-Roles/create_dvs_portgroup

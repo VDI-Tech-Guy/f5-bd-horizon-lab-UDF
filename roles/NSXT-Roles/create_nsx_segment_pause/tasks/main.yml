@@ -1,0 +1,5 @@
+---
+  - pause:
+      minutes: 1 
+    when: nsxt_segment_exists|bool == false
+

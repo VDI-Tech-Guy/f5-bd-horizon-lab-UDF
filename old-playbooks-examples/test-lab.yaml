@@ -1,0 +1,37 @@
+---
+#- hosts: localhost
+#  connection: local
+#  gather_facts: true
+#  vars:
+#    - ansible_python_interpreter: "/usr/bin/python3"
+#    - nsxt_segment_exist: false
+#  vars_files:
+#    - ../vars/nsx.yml
+#  roles:
+#    - { role: roles/NSXT-Roles/check_manager_status, when: is_nsx_environment|bool}
+#    - { role: roles/NSXT-Roles/list_logical_switches, when: is_nsx_environment|bool}
+#    - { role: roles/NSXT-Roles/create_nsx_segment, when: is_nsx_environment|bool}
+#    - { role: roles/NSXT-Roles/create_nsx_segment_pause, when: is_nsx_environment|bool}
+
+
+# Build VMs
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  vars_files:
+    - ../vars/active_directory.yml
+    - ../vars/vsphere.yml
+  roles:
+    - roles/vSphere-Roles/create_resource_pool
+    - roles/vSphere-Roles/create_vm
+
+# Horizon Installation
+- hosts: dynamic_hosts
+  connection: local
+  gather_facts: false
+  vars_files:
+    - ../vars/active_directory.yml
+    - ../vars/windows.yml
+  roles:
+    - { role: roles/Horizon-Roles/install_horizon, when: is_horizon_environment|bool}
+

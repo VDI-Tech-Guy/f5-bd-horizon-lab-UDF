@@ -1,0 +1,44 @@
+---
+  - name: Create Directory
+    win_file:
+      path: c:\tools
+      state: directory
+
+  - name: Copy File from UNC Path (CS Install)
+    win_copy: 
+      src: "{{cs_installer}}" 
+      dest: c:\tools\VMware-HorizonCS.exe
+      remote_src: true
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True
+
+  - name: Copy File from UNC Path (Script)
+    win_copy:
+      src: "{{cs_installer_script}}"
+      dest: c:\tools\install_horizon.cmd
+      remote_src: true
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True
+
+  - name: Copy File from UNC Path (Agent)
+    win_copy:
+      src: "{{agent_installer}}"
+      dest: c:\tools\VMware-HorizonAG.exe
+      remote_src: true
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True

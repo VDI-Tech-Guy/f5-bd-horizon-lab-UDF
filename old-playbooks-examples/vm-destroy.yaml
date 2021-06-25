@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: true
+  vars_files:
+    - vars/vsphere.yml
+  roles:
+    - roles/destroy_vm

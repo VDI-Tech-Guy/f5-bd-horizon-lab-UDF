@@ -1,0 +1,8 @@
+---
+  - name: Check manager status
+    nsxt_manager_status:
+      hostname: "{{ nsx_hostname }}"
+      username: "{{ nsx_username }}"
+      password: "{{ nsx_password }}"
+      validate_certs: "{{ nsx_validate_certs }}"
+      wait_time: 50

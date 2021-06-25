@@ -1,0 +1,6 @@
+---
+# tasks
+
+ - name:  Destroy DVS Portgroup
+   include: destroy_dvs_porgroup.yml
+ 

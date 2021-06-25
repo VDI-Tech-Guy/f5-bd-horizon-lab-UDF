@@ -1,0 +1,10 @@
+---
+  - name: Install Horizon Connection Server
+    win_shell: c:\tools\install_horizon.cmd
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True

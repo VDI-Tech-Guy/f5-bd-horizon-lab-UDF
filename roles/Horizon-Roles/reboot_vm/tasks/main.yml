@@ -1,0 +1,10 @@
+---
+# tasks file for Create-VM
+
+ - name: Reboot the machine with all defaults
+   win_reboot:
+
+ - pause:
+     minutes: 2
+   tags:
+     - install

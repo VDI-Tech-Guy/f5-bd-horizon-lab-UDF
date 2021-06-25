@@ -1,0 +1,8 @@
+---
+# tasks file for Create-VM
+
+ - name: Copy Files to VMs
+   include: cp_files_uri.yml
+   tags:
+     - install
+

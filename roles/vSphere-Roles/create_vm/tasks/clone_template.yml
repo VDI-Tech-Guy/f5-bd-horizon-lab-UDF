@@ -1,0 +1,133 @@
+---
+  - debug:
+      msg: ' ip: "{{ vm_ip_address }}{{(vm_static_ip_start_range |int) + (item |int)}}"'
+    with_sequence: "start=0 count={{vm_count}}"
+
+
+
+  - name: Clone the template (Static IP, Domain Joined)
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: False
+      name: "{{ vm_hostname }}{{item}}"
+      template: "{{ vm_template }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm
+      cluster: "{{ cluster_name }}"
+      resource_pool: "{{resource_pool_name}}"
+      datastore: "{{ datastore }}"
+      linked_clone: "{{ is_linked_clone }}"
+      snapshot_src: "{{ vm_snapshot }}"
+      networks:
+      - name: "{{ vm_network }}"
+        ip: "{{ vm_ip_address }}{{(vm_static_ip_start_range |int) + (item |int) - 1}}" 
+        netmask: "{{ vm_netmask }}"
+        gateway: "{{ vm_gateway }}"
+        type: "{{ vm_network_type }}"
+        dns_servers: "{{ vm_dns_servers }}"
+      customization:
+        hostname: "{{ vm_hostname }}{{item}}"
+        dns_servers: "{{ vm_dns_servers }}"
+        joindomain: "{{ my_domain }}"
+        domainadminpassword: "{{ my_domain_password }}"
+        domainadmin: "{{ my_domain_admin }}"
+      state: poweredon
+      wait_for_ip_address: no
+      wait_for_customization: no
+    delegate_to: localhost
+    with_sequence: "start=1 count={{vm_count}} format=%.3d"
+    when: vm_network_type == "static" and vm_domain_join
+
+
+  - name: Clone the template (DHCP, Domain Joined)
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: False
+      name: "{{ vm_hostname }}{{item}}"
+      template: "{{ vm_template }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm
+      cluster: "{{ cluster_name }}"
+      resource_pool: "{{resource_pool_name}}"
+      datastore: "{{ datastore }}"
+      linked_clone: "{{ is_linked_clone }}"
+      snapshot_src: "{{ vm_snapshot }}"
+      networks:
+      - name: "{{ vm_network }}"
+      customization:
+        hostname: "{{ vm_hostname }}{{item}}"
+        dns_servers: "{{ vm_dns_servers }}"
+        joindomain: "{{ my_domain }}"
+        domainadminpassword: "{{ my_domain_password }}"
+        domainadmin: "{{ my_domain_admin }}"
+      state: poweredon
+      wait_for_ip_address: no
+      wait_for_customization: no
+    delegate_to: localhost
+    with_sequence: "start=1 count={{vm_count}} format=%.3d"
+    when: vm_network_type == "dhcp" and vm_domain_join
+
+  - name: Clone the template (Static IP, Non-Domain-Joined)
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: False
+      name: "{{ vm_hostname }}{{item}}"
+      template: "{{ vm_template }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm
+      cluster: "{{ cluster_name }}"
+      resource_pool: "{{resource_pool_name}}"
+      datastore: "{{ datastore }}"
+      linked_clone: "{{ is_linked_clone }}"
+      snapshot_src: "{{ vm_snapshot }}"
+      networks:
+      - name: "{{ vm_network }}"
+        ip: "{{ vm_ip_address }}{{(vm_static_ip_start_range |int) + (item |int) -1}}"
+        netmask: "{{ vm_netmask }}"
+        gateway: "{{ vm_gateway }}"
+        type: "{{ vm_network_type }}"
+        dns_servers: "{{ vm_dns_servers }}"
+      customization:
+        hostname: "{{ vm_hostname }}{{item}}"
+        dns_servers: "{{ vm_dns_servers }}"
+      state: poweredon
+      wait_for_ip_address: no
+      wait_for_customization: no
+    delegate_to: localhost
+    with_sequence: "start=1 count={{vm_count}} format=%.3d"
+    when: vm_network_type == "static" and not vm_domain_join
+
+
+  - name: Clone the template (DHCP, Non-Domain-Joined)
+    vmware_guest:
+      hostname: "{{ vcenter_hostname }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: False
+      name: "{{ vm_hostname }}{{item}}"
+      template: "{{ vm_template }}"
+      datacenter: "{{ datacenter_name }}"
+      folder: /{{ datacenter_name }}/vm
+      cluster: "{{ cluster_name }}"
+      resource_pool: "{{resource_pool_name}}"
+      datastore: "{{ datastore }}"
+      linked_clone: "{{ is_linked_clone }}"
+      snapshot_src: "{{ vm_snapshot }}"
+      networks:
+      - name: "{{ vm_network }}"
+      customization:
+        hostname: "{{ vm_hostname }}{{item}}"
+        dns_servers: "{{ vm_dns_servers }}"
+      state: poweredon
+      wait_for_ip_address: no
+      wait_for_customization: no
+    delegate_to: localhost
+    with_sequence: "start=1 count={{vm_count}} format=%.3d"
+    when: vm_network_type == "dhcp" and not vm_domain_join
+
