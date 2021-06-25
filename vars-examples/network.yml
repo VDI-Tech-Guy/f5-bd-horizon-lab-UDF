@@ -1,7 +1,0 @@
-vm_network: Eth-Server-Lan
-vm_netmask: 255.255.252.0
-vm_gateway: 192.168.192.1
-vm_network_type: static
-vm_dns_servers:
-  - 192.168.30.14
-  - 192.168.30.15

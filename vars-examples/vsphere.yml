@@ -1,8 +1,0 @@
-vcenter_hostname: "vcenter.domain.fqdn"
-vcenter_username: "username@domain"
-vcenter_password: "password"
-vcenter_validate_certs: no
-datacenter_name: "Gallifrey"
-cluster_name: "Tardis"
-datastore: "DELL-6TB"
-dvs_switch_name: "Prod-Network"

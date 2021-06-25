@@ -1,9 +1,0 @@
----
-# tasks
-
- - name: Create DVS Portgroup 
-   include: create_dvs_vlan.yml
-   with_items: "{{ vlan_range }}"
-   loop_control:
-     loop_var: vlan_info
-

@@ -1,7 +1,0 @@
----
-# tasks file for Create-VM
-
- - name: Get VM Information and Populate in Dynamic Tasks
-   include: get_vm_info.yml
-   tags: 
-     - install

@@ -1,9 +1,0 @@
----
-# tasks file for Destroy-VM
- - name: Power Off Force VMs
-   include: poweroff_vm.yml
-   ignore_errors: true
-
- - name: Destroy Provisioned VMs 
-   include: destroy_vm.yml
-   ignore_errors: true
