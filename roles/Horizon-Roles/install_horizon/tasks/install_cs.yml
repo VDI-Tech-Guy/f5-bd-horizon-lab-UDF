@@ -1,0 +1,38 @@
+---
+# tasks file for Create-VM
+
+ - name: Find Connection Server Install File
+   ansible.windows.win_find:
+     paths: c:\tools\
+     patterns: 'VMware-Horizon-Connection*.exe'
+   register: cs_install
+
+ - debug:
+     var: cs_install.files[0].path
+
+ - name: Install Horizon Connection Server Primary
+   ansible.windows.win_package:
+     path: "{{ cs_install.files[0].path }}" 
+     arguments: /s /v"/qn VDM_SERVER_INSTANCE_TYPE=1 VDM_INITIAL_ADMIN_SID=S-1-5-32-544 VDM_SERVER_RECOVERY_PWD="VMware123!" VDM_SERVER_RECOVERY_PWD_REMINDER=""VM123Bang"""
+   become: true
+   become_method: runas
+   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+   vars:
+     ansible_become_user: "{{ansible_user}}"
+     ansible_become_pass: "{{ansible_password}}"
+     ansible_winrm_kerberos_delegation: True
+   when: "'1' in inventory_hostname"
+ 
+ - name: Install Horizon Connection Server Secondary
+   ansible.windows.win_package:
+     path: "{{ cs_install.files[0].path }}"  
+     arguments: /s /v"/qn VDM_SERVER_INSTANCE_TYPE=2 ADAM_PRIMARY_NAME={{ horizon_primary }} VDM_INITIAL_ADMIN_SID=S-1-5-32-544" 
+   become: true
+   become_method: runas
+   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+   vars:
+     ansible_become_user: "{{ansible_user}}"
+     ansible_become_pass: "{{ansible_password}}"
+     ansible_winrm_kerberos_delegation: True
+   when: "'2' in inventory_hostname"
+

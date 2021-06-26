@@ -1,0 +1,6 @@
+---
+# tasks file date/time
+
+ - debug: 
+     msg: "{{ lookup('pipe','date') }}"
+
