@@ -1,0 +1,6 @@
+---
+  - name: Disable Windows Updates
+    ansible.windows.win_service:
+      name: Windows Update
+#      state: stopped
+      start_mode: disabled

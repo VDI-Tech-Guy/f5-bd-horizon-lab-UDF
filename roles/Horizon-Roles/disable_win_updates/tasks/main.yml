@@ -1,0 +1,10 @@
+---
+# tasks file for Create-VM
+
+ - name: Disable Windows Updates
+   include: disable_win_updates.yml
+
+ - name: Agent Reboot
+   ansible.windows.win_reboot:
+     post_reboot_delay: 60
+
