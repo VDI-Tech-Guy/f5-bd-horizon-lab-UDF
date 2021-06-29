@@ -1,0 +1,4 @@
+---
+ - name: Install Horizon Agent
+   include: reinstall_agent.yml
+   when: "'rds' in inventory_hostname|lower"
