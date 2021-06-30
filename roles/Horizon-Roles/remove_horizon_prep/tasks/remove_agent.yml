@@ -14,7 +14,9 @@
      ansible_winrm_kerberos_delegation: True
    when: horizon_version == "7x"
 
-
+ - name: Agent Reboot
+   ansible.windows.win_reboot:
+     post_reboot_delay: 60
 
 
 
