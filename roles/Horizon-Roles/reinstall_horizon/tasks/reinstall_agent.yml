@@ -26,7 +26,7 @@
    ansible.windows.win_package:
     path: "{{ ag_install.files[0].path }}"  
     arguments: /s /v"/qb VDM_VC_MANAGED_AGENT=0 VDM_SERVER_NAME={{ horizon_primary }} VDM_SERVER_USERNAME={{ ansible_win_domain }} VDM_SERVER_PASSWORD={{ ansible_password }} ADDLOCAL=ALL REBOOT=Reallysuppress"
-    expected_return_code: [0, 1641]
+    expected_return_code: [0, 1641, 3010]
    become: true
    become_method: runas
    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
