@@ -1,0 +1,22 @@
+---
+- hosts: connection_servers
+  connection: local
+  gather_facts: false
+  vars_files:
+    - /git/vars/UDF/horizon.yml
+    - /git/vars/UDF/windows.yml
+  roles:
+    - { role: roles/date-time}
+#    - { role: roles/Horizon-Roles/copy_files}
+    - { role: roles/Horizon-Roles/reinstall_horizon}
+
+- hosts: agents
+  connection: local
+  gather_facts: false
+  vars_files:
+    - /git/vars/UDF/horizon.yml
+    - /git/vars/UDF/windows.yml
+  roles:
+#    - { role: roles/Horizon-Roles/copy_files}
+    - { role: roles/Horizon-Roles/reinstall_horizon}
+    - { role: roles/date-time}
