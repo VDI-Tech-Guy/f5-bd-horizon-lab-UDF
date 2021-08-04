@@ -4,4 +4,5 @@
    f5networks.f5_modules.bigip_device_license:
      license_key: "{{ bip_license_key }}"
      provider: "{{ provider }}"
+     accept_eula: yes
    delegate_to: localhost
