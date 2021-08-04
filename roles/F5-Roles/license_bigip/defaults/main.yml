@@ -1,5 +1,5 @@
 ---
-# defaults file for ASM-Role
+# defaults file
 
 provider:
   server: "{{ ansible_host }}"

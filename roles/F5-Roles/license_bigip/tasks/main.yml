@@ -1,0 +1,7 @@
+---
+
+ - name: License BIG-IP using a key
+   f5networks.f5_modules.bigip_device_license:
+     license_key: "{{ bip_license_key }}"
+     provider: "{{ provider }}"
+   delegate_to: localhost
