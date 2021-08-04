@@ -6,6 +6,6 @@
     - /git/vars/UDF/bigip.yml
   roles:
     - { role: roles/date-time}
-    - { role: roles/F5-Roles/license_bigip}
-    - { role: roles/F5-Roles/create_irule}
+    - { role: roles/F5-Roles/license-bigip}
+    - { role: roles/F5-Roles/create-irule}
     - { role: roles/F5-Roles/deploy-horizon-iapp}
