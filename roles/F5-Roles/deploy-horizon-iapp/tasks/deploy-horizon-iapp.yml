@@ -1,4 +1,12 @@
 ---
+- ansible.builtin.stat:
+    path: "/git/vars/horizon_iapp_{{ iapp_templ }}.yml"
+  register: variables_bypass
+
+- ansible.builtin.include_vars:
+    file: "/git/vars/horizon_iapp_{{ iapp_templ }}.yml"
+  when: variables_bypass.stat.exists
+
 - name: Build JSON payload
   ansible.builtin.template: src=f5.horizon.{{ iapp_templ |lower }}.j2 dest=/tmp/f5.horizon.json
 
