@@ -1,11 +1,11 @@
 ---
 - name: Build JSON payload
-  ansible.builtin.template: src=f5.horizon.{{iapp_templ |lower }}.j2 dest=/tmp/f5.horizon.json
+  ansible.builtin.template: src=f5.horizon.{{ iapp_templ |lower }}.j2 dest=/tmp/f5.horizon.json
 
 - name: Deploy F5 Horizon iApp
   f5networks.f5_modules.bigip_iapp_service: #Using Collections if not use - bigip_iapp_service:
     name: "VMware-Horizon"
-    template: "{{iapp_template_name}}"
+    template: "{{ iapp_template_name }}"
     parameters: "{{ lookup('template', '/tmp/f5.horizon.json') }}"
     provider:
       server: "{{f5_ip}}"
