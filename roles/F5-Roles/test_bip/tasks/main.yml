@@ -1,0 +1,12 @@
+---
+
+ - name: Get BIP INFO
+   f5networks.f5_modules.bigip_device_info:
+     gather_subset: 
+       - system-info  
+     provider: "{{ provider }}"
+   delegate_to: localhost
+   register: bip_info
+
+ - debug:
+     var: bip_info
