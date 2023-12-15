@@ -6,7 +6,7 @@
      paths: c:\tools\
      patterns: 'VMware-Horizon-Connection*.exe'
    register: cs_install
-   until: cs_install.failed not false 
+   until: cs_install.failed == false 
    retries: 10
    delay: 30
 
