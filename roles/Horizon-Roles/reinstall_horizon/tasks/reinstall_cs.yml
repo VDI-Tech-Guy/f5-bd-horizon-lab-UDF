@@ -6,10 +6,11 @@
      paths: c:\tools\
      patterns: 'VMware-Horizon-Connection*.exe'
    register: cs_install
+   any_errors_fatal: true
 
  - pause:
      seconds: 20
-     
+
  - debug:
      var: cs_install.files[0].path
 
