@@ -7,6 +7,9 @@
      patterns: 'VMware-Horizon-Connection*.exe'
    register: cs_install
 
+ - pause:
+     seconds: 20
+     
  - debug:
      var: cs_install.files[0].path
 
