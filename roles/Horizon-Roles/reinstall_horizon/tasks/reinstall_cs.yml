@@ -10,9 +10,6 @@
    retries: 10
    delay: 30
 
- - debug:
-     var: state
-
  - pause:
      seconds: 20
 
