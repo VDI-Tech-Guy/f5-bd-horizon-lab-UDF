@@ -6,10 +6,9 @@
      paths: c:\tools\
      patterns: 'VMware-Horizon-Connection*.exe'
    register: cs_install
-   register: state
-  #  until: state.rc == 0
-  #  retries: 5
-  #  delay: 60
+   until: cs_install.failed not false 
+   retries: 10
+   delay: 30
 
  - debug:
      var: state
