@@ -6,7 +6,10 @@
      paths: c:\tools\
      patterns: 'VMware-Horizon-Connection*.exe'
    register: cs_install
-   any_errors_fatal: true
+   register: state
+   until: state.rc == 0
+   retries: 5
+   delay: 60
 
  - pause:
      seconds: 20
@@ -25,3 +28,6 @@
      ansible_become_user: "{{ansible_user}}"
      ansible_become_pass: "{{ansible_password}}"
      ansible_winrm_kerberos_delegation: True
+   until: state.rc == 0
+   retries: 5
+   delay: 60
