@@ -1,0 +1,21 @@
+---
+
+  - name: Reset Registry Permissions and Remove Timebomb
+    ansible.windows.win_shell: "{{item}}"
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True
+    with_items: 
+    - 'SetACL.exe -on "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\GracePeriod" -ot reg -actn setowner -ownr "n:Administrators"'
+    - 'SetACL.exe -on "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\GracePeriod" -ot reg -actn ace -ace "n:Administrators;p:full"'
+    - Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\RCM\GracePeriod" -Name "L$RTMTIMEBOMB*"
+    ignore_errors: True
+    register: fix_reg
+
+  - debug:
+      msg: "Timebomb and Registry Removal Failed because RDS hasnt created the Key yet (requires Login)"
+    when: fix_reg is failed

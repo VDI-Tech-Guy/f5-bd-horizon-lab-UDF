@@ -1,0 +1,16 @@
+---
+ - name: Remove Horizon Connection Server Components (Included ADAM)
+   include: remove_cs.yml
+   when: "'cs' in inventory_hostname|lower"
+
+ - name: Copy Set-ACL file to RDS System
+   include: copy_setacl.yml
+   when: "'rds' in inventory_hostname|lower"
+
+ - name: Reset RDS Timebomb
+   include: reset_timebomb.yml
+   when: "'rds' in inventory_hostname|lower"
+
+ - name: Remove Horizon Agent
+   include: remove_agent.yml
+   when: "'rds' in inventory_hostname|lower"

@@ -1,0 +1,13 @@
+---
+
+  - name: Copy Set-ACL File
+    win_copy: 
+      src: "{{set_acl_file_loc}}" 
+      dest: c:\windows\system32\
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True
