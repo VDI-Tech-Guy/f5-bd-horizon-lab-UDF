@@ -1,7 +1,7 @@
 ---
   - name: Add RDS Server Farm
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/inventory/v1/farms/{{get_farm_info.json[0].id}}/action/add-rds-servers"
+      url: "https://{{ ansible_host }}/rest/inventory/v1/farms/{{get_farm_info.json[0].id}}/action/add-rds-servers"
       method: POST
       body: 
         id: "{{ physical_machine_id_info.json[0].id }}"
