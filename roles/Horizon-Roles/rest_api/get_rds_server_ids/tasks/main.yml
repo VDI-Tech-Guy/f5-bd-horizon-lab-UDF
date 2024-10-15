@@ -33,7 +33,6 @@
     ansible.builtin.debug:
       var: machine_id_info
 
-
   - name: Get Physical Machine IDs
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/inventory/v1/physical-machines"
@@ -46,6 +45,10 @@
       validate_certs: false
     delegate_to: localhost
     register: physical_machine_id_info
+
+  - name: debug
+    ansible.builtin.debug:
+      var: physical_machine_id_info
 
   - name: debug
     ansible.builtin.debug:
