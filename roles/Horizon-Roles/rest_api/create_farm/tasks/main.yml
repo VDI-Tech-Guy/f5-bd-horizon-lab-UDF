@@ -1,7 +1,7 @@
 ---
   - name: Login to Horizon API
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/login"
+      url: "https://{{ ansible_host }}/rest/inventory/v3/farms"
       method: POST
       body: '{"domain": "F5DEMOS", "password": ["{{ ansible_password }}"], "username": "horizon_admin"}'
       status_code: 200
