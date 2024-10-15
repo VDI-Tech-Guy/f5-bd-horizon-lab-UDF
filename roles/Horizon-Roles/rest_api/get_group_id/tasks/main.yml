@@ -18,3 +18,7 @@
   - name: debug
     ansible.builtin.debug:
       var: group_id_info
+
+  - name: debug
+    ansible.builtin.debug:
+      var: group_id_info.json.local_privileges_info[0].access_group_id
