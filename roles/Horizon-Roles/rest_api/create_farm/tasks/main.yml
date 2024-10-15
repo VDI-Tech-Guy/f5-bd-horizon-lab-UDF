@@ -1,13 +1,21 @@
 ---
-  - name: Login to Horizon API
+  - name: Create Farm
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/inventory/v3/farms"
       method: POST
-      body: '{"domain": "F5DEMOS", "password": ["{{ ansible_password }}"], "username": "horizon_admin"}'
+      body: 
+        access_group_id": "{{ group_id_info.json.local_privileges_info[0].access_group_id }}"
+        name: "ManualFarm"
+        rds_server_ids: "[ {{ physical_machine_id_info.json[0].id }}]"
+        type: "MANUAL"
       status_code: 200
       timeout: 300
       body_format: json
       validate_certs: false
     delegate_to: localhost
-    register: login_info
+    register: farm_info
     # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: farm_info
