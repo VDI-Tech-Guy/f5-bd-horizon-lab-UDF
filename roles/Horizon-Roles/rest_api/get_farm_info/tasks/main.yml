@@ -16,4 +16,4 @@
 
   - name: debug
     ansible.builtin.debug:
-      var: get_farm_info
+      var: get_farm_info.json[0].id
