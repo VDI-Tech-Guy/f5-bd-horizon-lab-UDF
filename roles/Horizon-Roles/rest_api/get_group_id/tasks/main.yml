@@ -15,9 +15,9 @@
     register: group_id_info
     # no_log: true
 
-  - name: debug
-    ansible.builtin.debug:
-      var: group_id_info
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: group_id_info
 
   - name: debug
     ansible.builtin.debug:
