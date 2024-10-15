@@ -3,7 +3,7 @@
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/login"
       method: POST
-      body: '{"domain": "F5DEMOS", "password": ["{{ ansible_password }}"], "username": "horizon_admin"}'
+      body: '{"domain": "{{ ansible_domain }}", "password": ["{{ ansible_password }}"], "username": "{{ ansible_user }}"}'
       status_code: 200
       timeout: 300
       body_format: json
