@@ -1,38 +1,38 @@
 ---
-  - name: Get RDS Server IDs
-    ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/inventory/v1/rds-servers"
-      method: GET
-      headers:
-        Authorization: "Bearer {{ login_info.json.access_token }}"
-        Content-Type: application/json
-      status_code: 200
-      timeout: 300
-      validate_certs: false
-    delegate_to: localhost
-    register: rds_server_id_info
+  # - name: Get RDS Server IDs
+  #   ansible.builtin.uri:
+  #     url: "https://{{ ansible_host }}/rest/inventory/v1/rds-servers"
+  #     method: GET
+  #     headers:
+  #       Authorization: "Bearer {{ login_info.json.access_token }}"
+  #       Content-Type: application/json
+  #     status_code: 200
+  #     timeout: 300
+  #     validate_certs: false
+  #   delegate_to: localhost
+  #   register: rds_server_id_info
 
-  - name: debug
-    ansible.builtin.debug:
-      var: rds_server_id_info
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: rds_server_id_info
 
 
-  - name: Get Machine IDs
-    ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/inventory/v1/machines"
-      method: GET
-      headers:
-        Authorization: "Bearer {{ login_info.json.access_token }}"
-        Content-Type: application/json
-      status_code: 200
-      timeout: 300
-      validate_certs: false
-    delegate_to: localhost
-    register: machine_id_info
+  # - name: Get Machine IDs
+  #   ansible.builtin.uri:
+  #     url: "https://{{ ansible_host }}/rest/inventory/v1/machines"
+  #     method: GET
+  #     headers:
+  #       Authorization: "Bearer {{ login_info.json.access_token }}"
+  #       Content-Type: application/json
+  #     status_code: 200
+  #     timeout: 300
+  #     validate_certs: false
+  #   delegate_to: localhost
+  #   register: machine_id_info
 
-  - name: debug
-    ansible.builtin.debug:
-      var: machine_id_info
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: machine_id_info
 
 
   - name: Get Physical Machine IDs
@@ -50,4 +50,4 @@
 
   - name: debug
     ansible.builtin.debug:
-      var: physical_machine_id_info
+      var: physical_machine_id_info.json[0].id
