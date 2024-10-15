@@ -11,4 +11,5 @@
     - { role: roles/Horizon-Roles/rest_api/get_group_id}
     - { role: roles/Horizon-Roles/rest_api/get_rds_server_ids}
     - { role: roles/Horizon-Roles/rest_api/create_farm}
+    - { role: roles/Horizon-Roles/rest_api/get_farm_info}
     - { role: roles/date-time}
