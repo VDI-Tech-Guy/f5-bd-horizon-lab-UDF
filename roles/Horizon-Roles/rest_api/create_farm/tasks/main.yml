@@ -1,12 +1,12 @@
 ---
   - name: Create Farm
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/inventory/v3/farms"
+      url: "https://{{ ansible_host }}/rest/inventory/v1/farms"
       method: POST
       body: 
         access_group_id: "{{ group_id_info.json.local_privileges_info[0].access_group_id }}"
         name: "ManualFarm"
-        rds_server_ids: "[ {{ physical_machine_id_info.json[0].id }}]"
+        rds_server_ids: "[ {{ physical_machine_id_info.json[0].id }} ]"
         type: "MANUAL"
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
