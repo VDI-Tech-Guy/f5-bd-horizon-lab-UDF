@@ -4,7 +4,7 @@
       url: "https://{{ ansible_host }}/config/v1/admin-users-or-groups/permissions"
       method: GET
       headers:
-        Authorization: "Bearer {{ login_info.access_token }}"
+        Authorization: "Bearer {{ login_info.json.access_token }}"
       status_code: 200
       timeout: 300
       body_format: json
