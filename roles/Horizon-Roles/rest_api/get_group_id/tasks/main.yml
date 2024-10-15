@@ -1,7 +1,7 @@
 ---
   - name: Get Group ID
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/config/v1/admin-users-or-groups/permissions"
+      url: "https://{{ ansible_host }}/rest/monitor/connection-servers"  #/config/v1/admin-users-or-groups/permissions"
       method: GET
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
