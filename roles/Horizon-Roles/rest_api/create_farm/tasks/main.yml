@@ -22,9 +22,9 @@
     # no_log: true
     ignore_errors: true
 
-  - name: debug
-    ansible.builtin.debug:
-      var: farm_info
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: farm_info
 
   # - name: Add Farm Member
   #   ansible.builtin.uri:
