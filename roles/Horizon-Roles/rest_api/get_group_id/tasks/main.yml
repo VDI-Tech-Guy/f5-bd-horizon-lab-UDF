@@ -6,7 +6,7 @@
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
         #accept: "*/*"
-        #Content-Type: application/json
+        Content-Type: application/json
       status_code: 200
       timeout: 300
       #body_format: json
