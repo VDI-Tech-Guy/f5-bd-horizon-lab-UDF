@@ -4,7 +4,7 @@
       url: "https://{{ ansible_host }}/rest/inventory/v3/farms"
       method: POST
       body: 
-        access_group_id": "{{ group_id_info.json.local_privileges_info[0].access_group_id }}"
+        access_group_id: "{{ group_id_info.json.local_privileges_info[0].access_group_id }}"
         name: "ManualFarm"
         rds_server_ids: "[ {{ physical_machine_id_info.json[0].id }}]"
         type: "MANUAL"
