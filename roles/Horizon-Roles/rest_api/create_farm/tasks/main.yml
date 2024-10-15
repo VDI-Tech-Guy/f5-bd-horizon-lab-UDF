@@ -8,6 +8,8 @@
         name: "ManualFarm"
         #rds_server_ids: "[ {{ physical_machine_id_info.json[0].id }} ]"
         type: "MANUAL"
+        display_protocol_settings:
+          default_display_protocol: "BLAST"
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
         Content-Type: application/json
