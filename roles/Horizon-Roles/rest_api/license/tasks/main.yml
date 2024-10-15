@@ -1,0 +1,8 @@
+---
+ - name: Install Horizon Connection Server
+   include: reinstall_cs.yml
+   when: "'cs' in inventory_hostname|lower"
+
+ - name: Install Horizon Agent
+   include: reinstall_agent.yml
+   when: "'rds' in inventory_hostname|lower"

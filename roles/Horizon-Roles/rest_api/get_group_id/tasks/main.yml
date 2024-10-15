@@ -1,0 +1,18 @@
+---
+  - name: Get Group ID
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/config/v1/admin-users-or-groups/permissions"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ login_info.access_token }}"
+      status_code: 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: group_id_info
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: group_id_info
