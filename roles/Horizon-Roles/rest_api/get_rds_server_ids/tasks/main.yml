@@ -19,7 +19,7 @@
 
   - name: Get Machine IDs
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/inventory/v3/machines"
+      url: "https://{{ ansible_host }}/rest/inventory/v1/machines"
       method: GET
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
@@ -33,3 +33,21 @@
   - name: debug
     ansible.builtin.debug:
       var: machine_id_info
+
+
+  - name: Get Physical Machine IDs
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/inventory/v1/physical-machines"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 200
+      timeout: 300
+      validate_certs: false
+    delegate_to: localhost
+    register: physical_machine_id_info
+
+  - name: debug
+    ansible.builtin.debug:
+      var: physical_machine_id_info
