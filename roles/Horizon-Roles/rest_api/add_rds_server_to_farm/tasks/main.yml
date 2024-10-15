@@ -3,7 +3,7 @@
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/inventory/v1/farms/{{get_farm_info.json[0].id}}/action/add-rds-servers"
       method: POST
-      body: "[ {{ physical_machine_id_info.json[0].id }} ]"
+      body: '[ "{{ physical_machine_id_info.json[0].id }}" ]'
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
         Content-Type: application/json
