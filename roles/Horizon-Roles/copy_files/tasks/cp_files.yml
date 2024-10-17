@@ -9,6 +9,9 @@
       path: c:\tools
       state: directory
 
+  - debug:
+      var: found_files
+
   - name: Download earthrise.jpg to specified path
     ansible.windows.win_get_url:
       url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
