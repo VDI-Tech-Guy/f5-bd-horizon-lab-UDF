@@ -1,5 +1,5 @@
 ---
-- hosts: connection_servers
+- hosts: all
   connection: local
   gather_facts: false
   vars_files:
