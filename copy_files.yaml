@@ -13,7 +13,7 @@
 
     - debug:
         var: item.path
-      with_items: files
+      with_items: "{{ files }}"
 
 - hosts: connection_servers
   connection: local
