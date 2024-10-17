@@ -1,4 +1,19 @@
 ---
+
+- hosts: localhost
+  connection: local
+  tasks:
+
+    - name: Recursively find /tmp files older than 2 days
+      ansible.builtin.find:
+        paths: /git/files/horizon_8x
+        recurse: yes
+      register: files
+      delegate_to: localhost
+
+    - debug:
+        var: files
+
 - hosts: connection_servers
   connection: local
   gather_facts: false
