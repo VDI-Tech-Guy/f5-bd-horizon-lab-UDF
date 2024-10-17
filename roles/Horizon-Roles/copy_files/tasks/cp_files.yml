@@ -9,7 +9,7 @@
 
   - debug:
       var: item.path
-    with_items: "{{ found_files.files }}"
+    with_items: "{{ found_files.files [4:]}}"
 
   - name: Remove Directory if Exists
     win_file:
@@ -26,6 +26,7 @@
       url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
       dest: c:\tools\VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe
     when: horizon_version|lower == "8x"
+    with_items: "{{ found_files.files }}"
 
   # - name: Copy VMware Horizon files from "{{horizon7x_files}})
   #   win_copy: 
