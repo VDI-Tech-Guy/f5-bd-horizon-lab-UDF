@@ -13,7 +13,7 @@
 
   - set_fact:
       array_list: "{{ array_list + [item.path [5:]] }}"
-      array_split: "{{ array_split + [item.path.split('/')[tail]] }}"
+      array_split: "{{ array_split + [item.path.split('/')[-1]] }}"
     with_items: "{{ found_files.files }}"
 
   - debug:
