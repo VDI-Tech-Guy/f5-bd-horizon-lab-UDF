@@ -12,7 +12,7 @@
   #   with_items: "{{ found_files.files }}"
 
   - set_fact:
-      array_list: "{{ array_list + [item.path [4:]] "
+      array_list: "{{ array_list + [item.path [4:]] }}"
     with_items: "{{ found_files.files }}"
 
   - debug:
