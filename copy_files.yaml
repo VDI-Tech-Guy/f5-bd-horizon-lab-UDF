@@ -1,23 +1,23 @@
 ---
 
-- hosts: localhost
-  connection: local
-  tasks:
+# - hosts: localhost
+#   connection: local
+#   tasks:
 
-    - name: Find Installation File Names
-      ansible.builtin.find:
-        paths: /git/files/horizon_8x
-        recurse: yes
-      register: found_files
-      delegate_to: localhost
+#     # - name: Find Installation File Names
+#     #   ansible.builtin.find:
+#     #     paths: /git/files/horizon_8x
+#     #     recurse: yes
+#     #   register: found_files
+#     #   delegate_to: localhost
 
-    - debug:
-        var: item.path
-      with_items: "{{ found_files.files }}"
+#     # - debug:
+#     #     var: item.path
+#     #   with_items: "{{ found_files.files }}"
 
 - hosts: connection_servers
   connection: local
-  gather_facts: true
+  gather_facts: false
   vars_files:
     - /git/vars/UDF/horizon.yml
     - /git/vars/UDF/windows.yml

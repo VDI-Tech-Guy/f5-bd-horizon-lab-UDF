@@ -1,4 +1,16 @@
 ---
+
+  - name: Find Installation File Names
+    ansible.builtin.find:
+      paths: /git/files/horizon_8x
+      recurse: yes
+    register: found_files
+    delegate_to: localhost
+
+  - debug:
+      var: item.path
+    with_items: "{{ found_files.files }}"
+
   - name: Remove Directory if Exists
     win_file:
       path: c:\tools
@@ -8,9 +20,6 @@
     win_file:
       path: c:\tools
       state: directory
-
-  - debug:
-      var: found_files
 
   - name: Download earthrise.jpg to specified path
     ansible.windows.win_get_url:
