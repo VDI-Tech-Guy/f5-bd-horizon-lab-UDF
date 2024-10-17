@@ -8,8 +8,8 @@
     delegate_to: localhost
 
   - debug:
-      var: item.path
-    with_items: "{{ found_files.files [4:]}}"
+      msg: "{{ item.path [4:] }}"
+    with_items: "{{ found_files.files }}"
 
   - name: Remove Directory if Exists
     win_file:
