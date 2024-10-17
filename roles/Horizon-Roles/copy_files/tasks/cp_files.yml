@@ -9,28 +9,34 @@
       path: c:\tools
       state: directory
 
-  - name: Copy VMware Horizon files from "{{horizon7x_files}})
-    win_copy: 
-      src: "{{horizon7x_files}}" 
-      dest: c:\tools\
-    become: true
-    become_method: runas
-    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-    vars:
-      ansible_become_user: "{{ansible_user}}"
-      ansible_become_pass: "{{ansible_password}}"
-      ansible_winrm_kerberos_delegation: True
-    when: horizon_version|lower == "7x"
-
-  - name: Copy VMware Horizon files from "{{horizon8x_files}})
-    win_copy: 
-      src: "{{horizon8x_files}}" 
-      dest: c:\tools\
-    become: true
-    become_method: runas
-    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-    vars:
-      ansible_become_user: "{{ansible_user}}"
-      ansible_become_pass: "{{ansible_password}}"
-      ansible_winrm_kerberos_delegation: True
+  - name: Download earthrise.jpg to specified path
+    ansible.windows.win_get_url:
+      url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
+      dest: c:\tools\VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe
     when: horizon_version|lower == "8x"
+
+  # - name: Copy VMware Horizon files from "{{horizon7x_files}})
+  #   win_copy: 
+  #     src: "{{horizon7x_files}}" 
+  #     dest: c:\tools\
+  #   become: true
+  #   become_method: runas
+  #   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  #   vars:
+  #     ansible_become_user: "{{ansible_user}}"
+  #     ansible_become_pass: "{{ansible_password}}"
+  #     ansible_winrm_kerberos_delegation: True
+  #   when: horizon_version|lower == "7x"
+
+  # - name: Copy VMware Horizon files from "{{horizon8x_files}})
+  #   win_copy: 
+  #     src: "{{horizon8x_files}}" 
+  #     dest: c:\tools\
+  #   become: true
+  #   become_method: runas
+  #   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  #   vars:
+  #     ansible_become_user: "{{ansible_user}}"
+  #     ansible_become_pass: "{{ansible_password}}"
+  #     ansible_winrm_kerberos_delegation: True
+  #   when: horizon_version|lower == "8x"
