@@ -32,10 +32,10 @@
       path: c:\tools
       state: directory
 
-  - name: Download earthrise.jpg to specified path
+  - name: Download Installation Files for Horizon
     ansible.windows.win_get_url:
       url: "http://10.1.1.9/{{ item }}"
-      dest: "c:\tools\"{{ item.path.split('/')[-1] }}"
+      dest: "c:\tools\"{{ item.split('/')[-1] }}"
     when: horizon_version|lower == "8x"
     with_items: "{{ array_list }}"
 
