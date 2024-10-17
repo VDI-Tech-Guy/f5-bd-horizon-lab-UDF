@@ -9,6 +9,16 @@
       path: c:\tools
       state: directory
 
+  - name: Recursively find /tmp files older than 2 days
+    ansible.builtin.find:
+      paths: /git/files/horizon_8x
+      recurse: yes
+    register: files
+    delegate_to: localhost
+
+  - debug:
+      var: files
+
   - name: Download earthrise.jpg to specified path
     ansible.windows.win_get_url:
       url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
