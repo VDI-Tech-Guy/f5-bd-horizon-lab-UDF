@@ -21,6 +21,8 @@
   vars_files:
     - /git/vars/UDF/horizon.yml
     - /git/vars/UDF/windows.yml
+  vars:
+    array_list: []
   roles:
     - { role: roles/date-time}
     - { role: roles/Horizon-Roles/copy_files}
@@ -31,6 +33,8 @@
   vars_files:
     - /git/vars/UDF/horizon.yml
     - /git/vars/UDF/windows.yml
+  vars:
+    array_list: []
   roles:
     - { role: roles/Horizon-Roles/copy_files}
     - { role: roles/date-time}
