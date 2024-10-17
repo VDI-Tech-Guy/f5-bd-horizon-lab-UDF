@@ -7,9 +7,16 @@
     register: found_files
     delegate_to: localhost
 
-  - debug:
-      msg: "{{ item.path [4:] }}"
+  # - debug:
+  #     msg: "{{ item.path [4:] }}"
+  #   with_items: "{{ found_files.files }}"
+
+  - set_fact:
+      array_list: "{{ item.path [4:] }}"
     with_items: "{{ found_files.files }}"
+
+  - debug:
+      var: array_list
 
   - name: Remove Directory if Exists
     win_file:
