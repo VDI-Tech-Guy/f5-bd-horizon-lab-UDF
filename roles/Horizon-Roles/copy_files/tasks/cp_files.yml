@@ -2,7 +2,7 @@
 
   - name: Find Installation File Names
     ansible.builtin.find:
-      paths: /git/files/horizon_8x
+      paths: "{{ horizon8x_files }}"
       recurse: yes
     register: found_files
     delegate_to: localhost
@@ -13,14 +13,10 @@
 
   - set_fact:
       array_list: "{{ array_list + [item.path [5:]] }}"
-      array_split: "{{ array_split + [item.path.split('/')[-1]] }}"
     with_items: "{{ found_files.files }}"
 
-  - debug:
-      var: array_list
-
-  - debug:
-      var: array_split
+  # - debug:
+  #     var: array_list
 
   - name: Remove Directory if Exists
     win_file:
