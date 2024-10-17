@@ -8,12 +8,12 @@
       ansible.builtin.find:
         paths: /git/files/horizon_8x
         recurse: yes
-      register: files
+      register: found_files
       delegate_to: localhost
 
     - debug:
         var: item.path
-      with_items: "{{ files }}"
+      with_items: "{{ found_files.files }}"
 
 - hosts: connection_servers
   connection: local
