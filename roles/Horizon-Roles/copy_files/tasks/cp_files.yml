@@ -12,11 +12,15 @@
   #   with_items: "{{ found_files.files }}"
 
   - set_fact:
-      array_list: "{{ array_list + [item.path [4:]] }}"
+      array_list: "{{ array_list + [item.path [5:]] }}"
+      array_split: "{{ array_split + [item.path.split('/')}}"
     with_items: "{{ found_files.files }}"
 
   - debug:
       var: array_list
+
+  - debug:
+      var: array_split
 
   - name: Remove Directory if Exists
     win_file:
@@ -30,10 +34,10 @@
 
   - name: Download earthrise.jpg to specified path
     ansible.windows.win_get_url:
-      url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
+      url: "http://10.1.1.9/{{ item }}"
       dest: c:\tools\VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe
     when: horizon_version|lower == "8x"
-    with_items: "{{ found_files.files }}"
+    with_items: "{{ array_list }}"
 
   # - name: Copy VMware Horizon files from "{{horizon7x_files}})
   #   win_copy: 
