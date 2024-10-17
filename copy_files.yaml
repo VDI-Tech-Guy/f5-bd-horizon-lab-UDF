@@ -17,7 +17,7 @@
 
 - hosts: connection_servers
   connection: local
-  gather_facts: false
+  gather_facts: true
   vars_files:
     - /git/vars/UDF/horizon.yml
     - /git/vars/UDF/windows.yml
