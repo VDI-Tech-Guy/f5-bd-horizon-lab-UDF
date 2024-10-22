@@ -13,7 +13,7 @@
  - name: Install Horizon Connection Server Primary
    ansible.windows.win_package:
      path: "{{ cs_install.files[0].path }}" 
-     arguments: /s /v"/qn VDM_SERVER_INSTANCE_TYPE=1 VDM_INITIAL_ADMIN_SID=S-1-5-32-544 VDM_SERVER_RECOVERY_PWD=VMware123 VDM_SERVER_RECOVERY_PWD_REMINDER=VM123"
+     arguments: /s /v"/qn VDM_SERVER_INSTANCE_TYPE=1 VDM_INITIAL_ADMIN_SID=S-1-5-32-544 VDM_SERVER_RECOVERY_PWD=VMware123 VDM_SERVER_RECOVERY_PWD_REMINDER=""VM123"""
   #  become: true
   #  become_method: runas
   #  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
