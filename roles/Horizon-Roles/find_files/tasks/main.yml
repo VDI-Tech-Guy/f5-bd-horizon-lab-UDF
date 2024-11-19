@@ -1,0 +1,8 @@
+---
+
+  - name: Find Installation File Names
+    ansible.builtin.find:
+      paths: "{{ horizon8x_files }}"
+      recurse: yes
+    register: found_files
+    delegate_to: localhost
