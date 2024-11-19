@@ -8,6 +8,7 @@
     array_list: []
   roles:
     - { role: roles/date-time}
+    - { role: roles/Horizon-Roles/find_files}
     - { role: roles/Horizon-Roles/copy_files}
     - { role: roles/Horizon-Roles/install_horizon}
 
