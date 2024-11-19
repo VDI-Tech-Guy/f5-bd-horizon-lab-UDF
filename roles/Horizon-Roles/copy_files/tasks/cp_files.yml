@@ -1,4 +1,23 @@
 ---
+
+  - name: Find Installation File Names
+    ansible.builtin.find:
+      paths: "{{ horizon8x_files }}"
+      recurse: yes
+    register: found_files
+    delegate_to: localhost
+
+  # - debug:
+  #     msg: "{{ item.path [4:] }}"
+  #   with_items: "{{ found_files.files }}"
+
+  - set_fact:
+      array_list: "{{ array_list + [item.path [5:]] }}"
+    with_items: "{{ found_files.files }}"
+
+  # - debug:
+  #     var: array_list
+
   - name: Remove Directory if Exists
     win_file:
       path: c:\tools
@@ -9,11 +28,12 @@
       path: c:\tools
       state: directory
 
-  - name: Download earthrise.jpg to specified path
+  - name: Download Installation Files for Horizon
     ansible.windows.win_get_url:
-      url: "http://10.1.1.9/files/horizon_8x/VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe"
-      dest: c:\tools\VMware-Horizon-Connection-Server-x86_64-8.13.0-10070698069.exe
+      url: "http://10.1.1.9/{{ item }}"
+      dest: "c:\\tools\\{{ item.split('/')[-1] }}"
     when: horizon_version|lower == "8x"
+    with_items: "{{ array_list }}"
 
   # - name: Copy VMware Horizon files from "{{horizon7x_files}})
   #   win_copy: 
