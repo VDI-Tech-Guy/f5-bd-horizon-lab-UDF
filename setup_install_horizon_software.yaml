@@ -1,6 +1,5 @@
 ---
 - hosts: connection_servers
-  connection: local
   gather_facts: false
   vars_files:
     - /git/vars/UDF/horizon.yml
