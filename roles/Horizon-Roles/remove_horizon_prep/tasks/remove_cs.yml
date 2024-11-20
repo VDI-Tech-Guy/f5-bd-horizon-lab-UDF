@@ -15,47 +15,45 @@
   with_items: "{{ current_version.sub_keys }}"
   when: ("{" in item)
 
-- debug:
-    var: item
-  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value)
-  with_items: "{{current_version_2.results }}"
+# - debug:
+#     var: item
+#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value)
+#   with_items: "{{current_version_2.results }}"
 
-- debug:
-    var: item.item
+# - debug:
+#     var: item.item
+#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
+#   with_items: "{{current_version_2.results }}"
+
+# - debug:
+#     var: item.item
+#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined)
+#   with_items: "{{current_version_2.results }}"
+
+- name: Remove Horizon Sub_Component
+  ansible.windows.win_package:
+    product_id: "{{ item.item }}"
+    state: absent
+  become: true
+  become_method: runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ansible_user}}"
+    ansible_become_pass: "{{ansible_password}}"
+    ansible_winrm_kerberos_delegation: True
   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
   with_items: "{{current_version_2.results }}"
 
-- debug:
-    var: item.item
-  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined)
+- name: Remove Horizon Main Installer
+  ansible.windows.win_package:
+    product_id: "{{ item.item }}"
+    state: absent
+  become: true
+  become_method: runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ansible_user}}"
+    ansible_become_pass: "{{ansible_password}}"
+    ansible_winrm_kerberos_delegation: True
+  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
   with_items: "{{current_version_2.results }}"
-
-
-
-# - name: Remove Horizon Sub_Component
-#   ansible.windows.win_package:
-#     product_id: "{{ item.item }}"
-#     state: absent
-#   become: true
-#   become_method: runas
-#   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-#   vars:
-#     ansible_become_user: "{{ansible_user}}"
-#     ansible_become_pass: "{{ansible_password}}"
-#     ansible_winrm_kerberos_delegation: True
-#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
-#   with_items: "{{current_version_2.results }}"
-
-# - name: Remove Horizon Main Installer
-#   ansible.windows.win_package:
-#     product_id: "{{ item.item }}"
-#     state: absent
-#   become: true
-#   become_method: runas
-#   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-#   vars:
-#     ansible_become_user: "{{ansible_user}}"
-#     ansible_become_pass: "{{ansible_password}}"
-#     ansible_winrm_kerberos_delegation: True
-#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
-#   with_items: "{{current_version_2.results }}"
