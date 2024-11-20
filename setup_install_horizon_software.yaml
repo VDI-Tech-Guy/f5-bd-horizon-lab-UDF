@@ -25,3 +25,30 @@
     - { role: roles/Horizon-Roles/copy_files}
     - { role: roles/Horizon-Roles/install_horizon}
     - { role: roles/date-time}
+
+- hosts: connection_servers
+  gather_facts: false
+  vars_files:
+    - /git/vars/UDF/horizon.yml
+    - /git/vars/UDF/windows.yml
+  vars:
+    array_list: []
+  roles:
+    - { role: roles/date-time}
+    - { role: roles/Horizon-Roles/copy_locked_properties}
+
+- hosts: broker-cs1
+  connection: local
+  gather_facts: false
+  vars_files:
+    - /git/vars/UDF/horizon.yml
+    - /git/vars/UDF/restapi.yml
+  roles:
+    - { role: roles/date-time}
+    - { role: roles/Horizon-Roles/rest_api/login}
+    - { role: roles/Horizon-Roles/rest_api/get_group_id}
+    - { role: roles/Horizon-Roles/rest_api/get_rds_server_ids}
+    - { role: roles/Horizon-Roles/rest_api/create_farm}
+    - { role: roles/Horizon-Roles/rest_api/get_farm_info}
+    - { role: roles/Horizon-Roles/rest_api/add_rds_server_to_farm}
+    - { role: roles/date-time}
