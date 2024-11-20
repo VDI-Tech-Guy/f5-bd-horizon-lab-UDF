@@ -28,7 +28,7 @@
     ansible_become_pass: "{{ansible_password}}"
     ansible_winrm_kerberos_delegation: True
   register: horizon_removed
-  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined) and ("Horizon" in item.properties.DisplayName)
+  when: (item.properties.DisplayName is defined) and ("Horizon" in item.properties.DisplayName)
   with_items: "{{current_version_2.results }}"
 
 - name: Agent Reboot
