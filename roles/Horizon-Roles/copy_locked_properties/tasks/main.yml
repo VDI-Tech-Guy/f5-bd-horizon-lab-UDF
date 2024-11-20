@@ -2,7 +2,7 @@
 
   - name: Copy Locked.Properties file to folder
     win_copy: 
-      src: "{{ lookup('template', 'locked.properties', split_lines=false) }}"
+      src: "broker1.properties"
       dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
     become: true
     become_method: runas
@@ -11,3 +11,17 @@
       ansible_become_user: "{{ansible_user}}"
       ansible_become_pass: "{{ansible_password}}"
       ansible_winrm_kerberos_delegation: True
+   when: "'1' in inventory_hostname"
+
+  - name: Copy Locked.Properties file to folder
+    win_copy: 
+      src: "broker2.properties"
+      dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
+    become: true
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: "{{ansible_user}}"
+      ansible_become_pass: "{{ansible_password}}"
+      ansible_winrm_kerberos_delegation: True
+   when: "'2' in inventory_hostname"
