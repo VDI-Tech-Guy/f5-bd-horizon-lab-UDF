@@ -13,10 +13,11 @@
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ item }}"
   register: current_version_2
   with_items: "{{ current_version.sub_keys }}"
+  when: ("{" in item)
 
 - debug:
     var: item.properties.DisplayName.raw_value
-  when: ("{" in item)
+  # when: ("{" in item)
   with_items: "{{current_version_2.results }}"
 
 # - name: Obtain information about a registry key using short form
