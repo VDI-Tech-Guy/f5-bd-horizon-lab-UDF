@@ -5,8 +5,8 @@
     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
   register: current_version
 
-- debug:
-    var: current_version
+# - debug:
+#     var: current_version
 
 - name: Obtain information about a registry key using short form
   ansible.windows.win_reg_stat:
@@ -57,3 +57,17 @@
     ansible_winrm_kerberos_delegation: True
   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined)
   with_items: "{{current_version_2.results }}"
+
+- name: Remove Broker-02 ADAM
+  ansible.windows.win_package:
+    product_id: "ADAM_VMwareVDMDS$0"
+    state: absent
+  become: true
+  become_method: runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ansible_user}}"
+    ansible_become_pass: "{{ansible_password}}"
+    ansible_winrm_kerberos_delegation: True
+  when: "'2' in inventory_hostname"
+
