@@ -13,7 +13,7 @@
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ item }}"
   register: current_version_2
   with_items: "{{ current_version.sub_keys }}"
-  when: ("{" in item.item)
+  when: ("{" in item)
 
 - debug:
     var: item.properties.DisplayName.raw_value
