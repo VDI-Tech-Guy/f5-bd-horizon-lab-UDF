@@ -60,10 +60,12 @@
 
 - name: Remove Broker-02 ADAM
   ansible.windows.win_package:
+    # path: C:\Windows\ADAM\adamuninstall.exe
     product_id: "ADAM_VMwareVDMDS$0"
     arguments: 
       - /q
       - /force
+      # - /i:VMwareVDMDS
     state: absent
   become: true
   become_method: runas
