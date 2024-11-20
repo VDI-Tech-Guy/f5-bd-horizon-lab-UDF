@@ -16,7 +16,7 @@
 
 - debug:
     var: item.properties.DisplayName.raw_value
-  when: (item.properties.DisplayName is defined) and ("VMware" in item.properties.Publisher.raw_value)
+  when: ("{" in item)
   with_items: "{{current_version_2.results }}"
 
 # - name: Obtain information about a registry key using short form
