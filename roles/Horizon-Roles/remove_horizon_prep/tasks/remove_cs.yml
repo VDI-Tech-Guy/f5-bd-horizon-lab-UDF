@@ -8,6 +8,14 @@
 - debug:
     var: current_version
 
+- name: Obtain information about a registry key using short form
+  ansible.windows.win_reg_stat:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ item }}"
+  register: current_version_2
+  with_items: "{{ current_version.sub_keys }}"
+- debug:
+    var: current_version_2
+
 # - name: Obtain information about a registry key using short form
 #   ansible.windows.win_reg_stat:
 #     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
