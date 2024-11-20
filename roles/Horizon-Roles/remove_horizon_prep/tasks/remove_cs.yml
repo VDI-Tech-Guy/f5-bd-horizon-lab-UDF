@@ -15,7 +15,7 @@
   with_items: "{{ current_version.sub_keys }}"
 
 - debug:
-    var: current_version_2
+    var: item.properties.DisplayName
   when: (item.properties.DisplayName is defined) and '"Horizon" in item.properties.DisplayName'
   with_items: "{{current_version_2.results }}"
 
