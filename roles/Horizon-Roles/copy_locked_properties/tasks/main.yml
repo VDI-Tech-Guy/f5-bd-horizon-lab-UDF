@@ -11,7 +11,7 @@
       ansible_become_user: "{{ansible_user}}"
       ansible_become_pass: "{{ansible_password}}"
       ansible_winrm_kerberos_delegation: True
-   when: "'1' in inventory_hostname"
+    when: "'1' in inventory_hostname"
 
   - name: Copy Locked.Properties file to folder
     win_copy: 
@@ -24,4 +24,4 @@
       ansible_become_user: "{{ansible_user}}"
       ansible_become_pass: "{{ansible_password}}"
       ansible_winrm_kerberos_delegation: True
-   when: "'2' in inventory_hostname"
+    when: "'2' in inventory_hostname"
