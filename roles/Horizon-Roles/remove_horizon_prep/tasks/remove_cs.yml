@@ -13,7 +13,7 @@
     path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ item }}"
   register: current_version_2
   with_items: "{{ current_version.sub_keys }}"
-  when: item.properties.DisplayName contains "Horizon"
+  when: '"Horizon" in item.properties.DisplayName'
 
 - debug:
     var: current_version_2
