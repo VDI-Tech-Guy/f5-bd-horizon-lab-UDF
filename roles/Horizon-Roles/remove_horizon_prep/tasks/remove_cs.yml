@@ -15,8 +15,8 @@
   with_items: "{{ current_version.sub_keys }}"
 
 - debug:
-    var: item.properties.DisplayName
-  when: (item.properties.DisplayName is defined) and '"Horizon" in item.properties.DisplayName'
+    var: item.properties.DisplayName.raw_value
+  when: (item.properties.DisplayName is defined) and '"Horizon" in item.properties.DisplayName.raw_value'
   with_items: "{{current_version_2.results }}"
 
 # - name: Obtain information about a registry key using short form
