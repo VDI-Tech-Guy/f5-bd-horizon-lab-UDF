@@ -96,6 +96,9 @@
   ansible.windows.win_package:
     product_id: "{{ item.item }}"
     state: absent
+    arguments: 
+      - /q
+      - /force
   become: true
   become_method: runas
   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
