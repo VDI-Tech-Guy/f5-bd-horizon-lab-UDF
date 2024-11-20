@@ -35,3 +35,11 @@
     ansible.windows.win_service:
       name: wsbroker
       state: started
+
+  - name: Pause/Wait 
+    ansible.builtin.debug:
+      msg: "Wait 5 minutes for Broker to startup"
+
+  - name: Pause
+    pause:
+      minutes: 5
