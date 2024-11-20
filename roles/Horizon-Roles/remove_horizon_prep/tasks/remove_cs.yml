@@ -1,28 +1,40 @@
 ---
-# tasks file for Create-VM
 
- - name: Remove Horizon 7.13 Sub_Component
-   ansible.windows.win_package:
-     product_id: '{0B394671-3B4D-44F1-A591-A3373C887420}'
-     state: absent
-   become: true
-   become_method: runas
-   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-   vars:
-     ansible_become_user: "{{ansible_user}}"
-     ansible_become_pass: "{{ansible_password}}"
-     ansible_winrm_kerberos_delegation: True
-   when: horizon_version == "7x"
+- name: Obtain information about a registry key using short form
+  ansible.windows.win_reg_stat:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+  register: current_version
 
- - name: Remove Horizon 7.13 Main Installer
-   ansible.windows.win_package:
-     product_id: '{98341991-C9DB-41F7-ADD8-D0CEB7A4AD2E}'
-     state: absent
-   become: true
-   become_method: runas
-   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-   vars:
-     ansible_become_user: "{{ansible_user}}"
-     ansible_become_pass: "{{ansible_password}}"
-     ansible_winrm_kerberos_delegation: True
-   when: horizon_version == "7x"
+- debug:
+    var: current_version
+
+# - name: Obtain information about a registry key using short form
+#   ansible.windows.win_reg_stat:
+#     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
+#   register: current_version
+
+# - name: Remove Horizon Sub_Component
+#   ansible.windows.win_package:
+#     product_id: '{0B394671-3B4D-44F1-A591-A3373C887420}'
+#     state: absent
+#   become: true
+#   become_method: runas
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+#   vars:
+#     ansible_become_user: "{{ansible_user}}"
+#     ansible_become_pass: "{{ansible_password}}"
+#     ansible_winrm_kerberos_delegation: True
+#   when: horizon_version == "7x"
+
+# - name: Remove Horizon Main Installer
+#   ansible.windows.win_package:
+#     product_id: '{98341991-C9DB-41F7-ADD8-D0CEB7A4AD2E}'
+#     state: absent
+#   become: true
+#   become_method: runas
+#   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+#   vars:
+#     ansible_become_user: "{{ansible_user}}"
+#     ansible_become_pass: "{{ansible_password}}"
+#     ansible_winrm_kerberos_delegation: True
+#   when: horizon_version == "7x"
