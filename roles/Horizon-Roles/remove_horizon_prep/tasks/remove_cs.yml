@@ -16,7 +16,7 @@
 
 - debug:
     var: current_version_2
-  when: '"Horizon" in item.properties.DisplayName'
+  when: (item.properties.DisplayName is defined) and '"Horizon" in item.properties.DisplayName'
   with_items: "{{current_version_2.results }}"
 
 # - name: Obtain information about a registry key using short form
