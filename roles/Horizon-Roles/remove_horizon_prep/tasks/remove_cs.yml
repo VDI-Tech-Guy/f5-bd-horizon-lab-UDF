@@ -20,14 +20,21 @@
   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value)
   with_items: "{{current_version_2.results }}"
 
-# - name: Obtain information about a registry key using short form
-#   ansible.windows.win_reg_stat:
-#     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion
-#   register: current_version
+- debug:
+    var: item.item
+  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
+  with_items: "{{current_version_2.results }}"
+
+- debug:
+    var: item.item
+  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined)
+  with_items: "{{current_version_2.results }}"
+
+
 
 # - name: Remove Horizon Sub_Component
 #   ansible.windows.win_package:
-#     product_id: '{0B394671-3B4D-44F1-A591-A3373C887420}'
+#     product_id: "{{ item.item }}"
 #     state: absent
 #   become: true
 #   become_method: runas
@@ -36,11 +43,12 @@
 #     ansible_become_user: "{{ansible_user}}"
 #     ansible_become_pass: "{{ansible_password}}"
 #     ansible_winrm_kerberos_delegation: True
-#   when: horizon_version == "7x"
+#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
+#   with_items: "{{current_version_2.results }}"
 
 # - name: Remove Horizon Main Installer
 #   ansible.windows.win_package:
-#     product_id: '{98341991-C9DB-41F7-ADD8-D0CEB7A4AD2E}'
+#     product_id: "{{ item.item }}"
 #     state: absent
 #   become: true
 #   become_method: runas
@@ -49,4 +57,5 @@
 #     ansible_become_user: "{{ansible_user}}"
 #     ansible_become_pass: "{{ansible_password}}"
 #     ansible_winrm_kerberos_delegation: True
-#   when: horizon_version == "7x"
+#   when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is not defined)
+#   with_items: "{{current_version_2.results }}"
