@@ -3,7 +3,7 @@
   - name: Copy Locked.Properties file to folder
     win_copy: 
       src: "{{ lookup('template', 'locked.properties') }}"
-      dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\"
+      dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
     become: true
     become_method: runas
     become_flags: logon_type=new_credentials logon_flags=netcredentials_only
