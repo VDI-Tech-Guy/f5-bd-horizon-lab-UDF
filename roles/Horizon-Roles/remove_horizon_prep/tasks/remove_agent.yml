@@ -1,22 +1,40 @@
 ---
-# tasks file for Create-VM
 
- - name: Remove Horizon 7.13 Agent
-   ansible.windows.win_package:
-     product_id: '{6657B013-D47B-4901-9E6E-E192808FDCAB}'
-     state: absent
-   become: true
-   become_method: runas
-   become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-   vars:
-     ansible_become_user: "{{ansible_user}}"
-     ansible_become_pass: "{{ansible_password}}"
-     ansible_winrm_kerberos_delegation: True
-   when: horizon_version == "7x"
+- name: Obtain information about a registry key using short form
+  ansible.windows.win_reg_stat:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+  register: current_version
 
- - name: Agent Reboot
-   ansible.windows.win_reboot:
-     post_reboot_delay: 60
+# - debug:
+#     var: current_version
+
+- name: Obtain information about a registry key using short form
+  ansible.windows.win_reg_stat:
+    path: "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{{ item }}"
+  register: current_version_2
+  with_items: "{{ current_version.sub_keys }}"
+  when: ("{" in item)
+
+
+- name: Remove Horizon Agent
+  ansible.windows.win_package:
+    product_id: "{{ item.item }}"
+    state: absent
+  become: true
+  become_method: runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ansible_user}}"
+    ansible_become_pass: "{{ansible_password}}"
+    ansible_winrm_kerberos_delegation: True
+  register: horizon_removed
+  when: (item.properties.Publisher.raw_value is defined) and ("VMware" in item.properties.Publisher.raw_value) and (item.properties.DisplayName is defined) and ("Horizon" in item.properties.DisplayName)
+  with_items: "{{current_version_2.results }}"
+
+- name: Agent Reboot
+  ansible.windows.win_reboot:
+    post_reboot_delay: 60
+  when: horizon_moved.changed
 
 
 
