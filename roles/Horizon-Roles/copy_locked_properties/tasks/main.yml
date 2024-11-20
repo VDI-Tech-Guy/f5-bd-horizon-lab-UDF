@@ -2,7 +2,7 @@
 
   - name: Copy Locked.Properties file to folder
     win_copy: 
-      src: "{{ lookup('template', 'locked.properites') }}"
+      src: "{{ lookup('template', 'locked.properties') }}"
       dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\"
     become: true
     become_method: runas
