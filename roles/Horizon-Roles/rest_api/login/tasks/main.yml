@@ -10,7 +10,7 @@
       validate_certs: false
     delegate_to: localhost
     register: login_info
-    no_log: true
+    #no_log: true
 
   # - name: debug
   #   ansible.builtin.debug:
