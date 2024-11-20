@@ -1,5 +1,5 @@
 ---
-s
+
   - name: Copy Locked.Properties file to folder
     win_copy: 
       src: "{{ lookup('template', 'locked.properites') }}"
