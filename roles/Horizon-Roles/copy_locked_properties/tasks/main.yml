@@ -25,3 +25,13 @@
       ansible_become_pass: "{{ansible_password}}"
       ansible_winrm_kerberos_delegation: True
     when: "'2' in inventory_hostname"
+
+  - name: Stop Horizon Services
+    ansible.windows.win_service:
+      name: wsbroker
+      state: stopped
+
+  - name: Start Horizon Services
+    ansible.windows.win_service:
+      name: wsbroker
+      state: started
