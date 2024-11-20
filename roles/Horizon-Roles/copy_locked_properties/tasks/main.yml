@@ -2,7 +2,7 @@
 
   - name: Copy Locked.Properties file to folder
     win_copy: 
-      src: "broker1.properties"
+      src: "{{ role_path }}/files/broker1.properties"
       dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
     become: true
     become_method: runas
@@ -15,7 +15,7 @@
 
   - name: Copy Locked.Properties file to folder
     win_copy: 
-      src: "broker2.properties"
+      src: "{{ role_path }}/files/broker2.properties"
       dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
     become: true
     become_method: runas
