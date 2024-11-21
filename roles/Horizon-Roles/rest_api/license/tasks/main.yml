@@ -14,12 +14,12 @@
       validate_certs: false
     delegate_to: localhost
     register: license_info
-    #no_log: true
+    no_log: true
 
   # - name: debug
   #   ansible.builtin.debug:
   #     var: login_info
 
-  - name: debug
-    ansible.builtin.debug:
-      var: license_info
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: license_info
