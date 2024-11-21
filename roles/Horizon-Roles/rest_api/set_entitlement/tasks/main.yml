@@ -1,5 +1,8 @@
 ---
-  - name: Get Entitlement Info
+  - debug:
+      var: get_pool_list.json[0].id
+
+  - name: Set Entitlement Info
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/entitlements/v1/desktop-pools"
       method: POST
