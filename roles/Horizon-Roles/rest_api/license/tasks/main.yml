@@ -14,8 +14,8 @@
       body_format: json
       validate_certs: false
     delegate_to: localhost
-    register: license_info
-    no_log: true
+    register: license_info_set
+    # no_log: true
 
 
   - name: License Horizon
@@ -33,7 +33,7 @@
       validate_certs: false
     delegate_to: localhost
     register: license_info
-    no_log: true
+    # no_log: true
 
   # - name: debug
   #   ansible.builtin.debug:
