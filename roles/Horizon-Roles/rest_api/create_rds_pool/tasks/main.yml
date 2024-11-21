@@ -1,0 +1,34 @@
+---
+  - name: Get Pools Info
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools"
+      method: POST
+      body: 
+        display_name: "RDS-Pool"
+        enabled: true
+        name: "RDS-Pool"
+          settings:
+              allow_mutilple_sessions_per_user: false
+              cloud_assigned: false
+              cloud_managed: false
+              delete_in_progress: false
+              enable_client_restrictions: false
+              session_settings: 
+              allow_multiple_sessions_per_user: false
+              session_type: "DESKTOP"
+        source: "RDS"
+        type: "RDS"
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: create_rds_pool
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: create_rds_pool
