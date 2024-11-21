@@ -6,10 +6,10 @@
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/entitlements/v1/desktop-pools"
       method: POST
-      body: [
+      body: [ {
         ad_user_or_group_ids: [ "S-1-5-21-1000413815-2846153425-3326739136-513" ],
         id: "{{ get_pool_list.json[0].id }}"
-      ]
+      }]
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
         Content-Type: application/json
