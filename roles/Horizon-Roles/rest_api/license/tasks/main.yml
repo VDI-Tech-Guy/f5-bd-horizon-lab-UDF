@@ -11,7 +11,11 @@
       body_format: json
       validate_certs: false
     delegate_to: localhost
-    register: license_info_set
+    register: license_info
+
+  - name: debug
+    ansible.builtin.debug:
+      var: license_info
 
   - name: Set License Horizon Mode
     ansible.builtin.uri:
