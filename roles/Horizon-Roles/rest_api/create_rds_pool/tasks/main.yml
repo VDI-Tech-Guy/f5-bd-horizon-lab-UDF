@@ -7,7 +7,6 @@
         display_name: "RDS-Pool"
         enabled: true
         name: "RDS-Pool"
-        source: "RDS"
         type: "RDS"
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
