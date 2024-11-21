@@ -5,6 +5,7 @@
       method: POST
       body: 
         display_name: "RDS-Pool"
+        farm_id: "{{ get_farm_info.json[0].id }}"
         enabled: true
         name: "RDS-Pool"
         type: "RDS"

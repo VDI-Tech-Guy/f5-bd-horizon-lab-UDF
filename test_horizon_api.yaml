@@ -9,7 +9,7 @@
   roles:
     - { role: roles/date-time}
     - { role: roles/Horizon-Roles/rest_api/login}
-    - { role: roles/Horizon-Roles/rest_api/get_pool_info}
+    - { role: roles/Horizon-Roles/rest_api/get_farm_info}
     - { role: roles/Horizon-Roles/rest_api/create_rds_pool}
     - { role: roles/Horizon-Roles/rest_api/get_pool_info}
     # - { role: roles/Horizon-Roles/rest_api/get_rds_server_ids}
