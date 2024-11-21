@@ -1,0 +1,43 @@
+---
+  - name: Get Pools Info
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: get_pool_list
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: get_pool_list
+
+  - name: debug
+    ansible.builtin.debug:
+      var: get_pool_list.json[0].id
+
+  - name: Get Pools Info
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools/{{item.id}}"
+      method: GET
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: get_pool_info
+    with_items: "{{ get_pool_list.json }}"
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: get_pool_info

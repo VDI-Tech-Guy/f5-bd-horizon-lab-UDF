@@ -1,0 +1,25 @@
+---
+  - name: Create Pool with Info
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools"
+      method: POST
+      body: 
+        display_name: "RDS-Pool"
+        farm_id: "{{ get_farm_info.json[0].id }}"
+        enabled: true
+        name: "RDS-Pool"
+        type: "RDS"
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: create_rds_pool
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:x`
+      var: create_rds_pool
