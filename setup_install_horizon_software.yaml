@@ -53,7 +53,7 @@
     - { role: roles/Horizon-Roles/rest_api/get_farm_info}
     - { role: roles/Horizon-Roles/rest_api/add_rds_server_to_farm}
     - { role: roles/Horizon-Roles/rest_api/create_rds_pool}
-    - { role: roles/Horizon-Roles/rest_api/create_apps}
-    - { role: roles/Horizon-Roles/rest_api/get_app_info}
+    # - { role: roles/Horizon-Roles/rest_api/create_apps}
+    # - { role: roles/Horizon-Roles/rest_api/get_app_info}
     - { role: roles/Horizon-Roles/rest_api/set_entitlement}
     - { role: roles/date-time}
