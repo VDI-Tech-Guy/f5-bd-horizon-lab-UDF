@@ -1,5 +1,5 @@
 ---
-  - name: Get Pools Info
+  - name: Create Pool with Info
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools"
       method: POST
