@@ -14,8 +14,8 @@
           delete_in_progress: false
           enable_client_restrictions: false
           session_settings: 
-          allow_multiple_sessions_per_user: false
-          session_type: "DESKTOP"
+            allow_multiple_sessions_per_user: false
+            session_type: "DESKTOP"
         source: "RDS"
         type: "RDS"
       headers:
