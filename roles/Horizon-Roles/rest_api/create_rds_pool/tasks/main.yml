@@ -7,15 +7,6 @@
         display_name: "RDS-Pool"
         enabled: true
         name: "RDS-Pool"
-        settings:
-          allow_mutilple_sessions_per_user: false
-          cloud_assigned: false
-          cloud_managed: false
-          delete_in_progress: false
-          enable_client_restrictions: false
-          session_settings: 
-            allow_multiple_sessions_per_user: false
-            session_type: "DESKTOP"
         source: "RDS"
         type: "RDS"
       headers:
