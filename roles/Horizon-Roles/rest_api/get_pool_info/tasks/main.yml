@@ -24,7 +24,7 @@
 
   - name: Get Pools Info
     ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools/{{item}}"
+      url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools/{{item.id}}"
       method: GET
       headers:
         Authorization: "Bearer {{ login_info.json.access_token }}"
