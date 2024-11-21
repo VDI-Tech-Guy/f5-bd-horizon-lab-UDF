@@ -21,5 +21,5 @@
     # no_log: true
 
   - name: debug
-    ansible.builtin.debug:x`
+    ansible.builtin.debug:
       var: create_rds_pool
