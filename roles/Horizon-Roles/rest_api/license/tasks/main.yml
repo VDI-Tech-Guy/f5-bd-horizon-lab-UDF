@@ -1,8 +1,22 @@
 ---
- - name: Install Horizon Connection Server
-   include: reinstall_cs.yml
-   when: "'cs' in inventory_hostname|lower"
+  - name: License Horizon
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/config/v2/licenses"
+      method: POST
+      body: 
+        license_key: "{{ horizon_license }}"
+      status_code: 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: license_info
+    #no_log: true
 
- - name: Install Horizon Agent
-   include: reinstall_agent.yml
-   when: "'rds' in inventory_hostname|lower"
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: login_info
+
+  - name: debug
+    ansible.builtin.debug:
+      var: license_info
