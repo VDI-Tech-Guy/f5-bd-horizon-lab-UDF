@@ -35,7 +35,7 @@
       validate_certs: false
     delegate_to: localhost
     register: get_pool_info
-    with_items: get_pool_list.json
+    with_items: "{{ get_pool_list.json }}"
     # no_log: true
 
   - name: debug
