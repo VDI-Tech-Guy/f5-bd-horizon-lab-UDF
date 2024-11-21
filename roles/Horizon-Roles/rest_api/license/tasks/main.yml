@@ -5,6 +5,9 @@
       method: POST
       body: 
         license_key: "{{ horizon_license }}"
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
       status_code: 200
       timeout: 300
       body_format: json
