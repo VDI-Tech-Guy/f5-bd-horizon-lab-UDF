@@ -1,0 +1,46 @@
+---
+  - name: Get Entitlement Info
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/entitlements/v1/desktop-pools"
+      method: POST
+      body:
+        ad_user_or_group_ids: [ "S-1-5-21-1000413815-2846153425-3326739136-513" ]
+        id: "{{ get_pool_list.json[0].id }}"
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: get_entitlement_list
+    # no_log: true
+
+  - name: debug
+    ansible.builtin.debug:
+      var: get_entitlement_list
+
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: get_pool_list.json[0].id
+
+  # - name: Get Pools Info
+  #   ansible.builtin.uri:
+  #     url: "https://{{ ansible_host }}/rest/inventory/v1/desktop-pools/{{item.id}}"
+  #     method: GET
+  #     headers:
+  #       Authorization: "Bearer {{ login_info.json.access_token }}"
+  #       Content-Type: application/json
+  #     status_code: 201, 200
+  #     timeout: 300
+  #     body_format: json
+  #     validate_certs: false
+  #   delegate_to: localhost
+  #   register: get_pool_info
+  #   with_items: "{{ get_pool_list.json }}"
+  #   # no_log: true
+
+  # - name: debug
+  #   ansible.builtin.debug:
+  #     var: get_pool_info
