@@ -57,7 +57,7 @@
       url: "https://{{ ansible_host }}/rest/config/v1/licenses/action/validate"
       method: POST
       body: 
-        license_key: "{{ horizon_license }}"
+        license_key: "M148L-XXXXX-XXXXX-XXXXX-CDFHM"
         license_mode: "DEFAULT"
         expires: 0
       headers:
