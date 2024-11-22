@@ -17,22 +17,22 @@
     ansible.builtin.debug:
       var: license_info
 
-  - name: Set License Horizon Mode
-    ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/config/v1/licenses/action/set-mode"
-      method: POST
-      body: 
-        license_mode: "PERPETUAL_ONLY"
-      headers:
-        Authorization: "Bearer {{ login_info.json.access_token }}"
-        Content-Type: application/json
-      status_code: 204, 201, 200
-      timeout: 300
-      body_format: json
-      validate_certs: false
-    delegate_to: localhost
-    register: license_info_set
-    # no_log: true
+  # - name: Set License Horizon Mode
+  #   ansible.builtin.uri:
+  #     url: "https://{{ ansible_host }}/rest/config/v1/licenses/action/set-mode"
+  #     method: POST
+  #     body: 
+  #       license_mode: "PERPETUAL_ONLY"
+  #     headers:
+  #       Authorization: "Bearer {{ login_info.json.access_token }}"
+  #       Content-Type: application/json
+  #     status_code: 204, 201, 200
+  #     timeout: 300
+  #     body_format: json
+  #     validate_certs: false
+  #   delegate_to: localhost
+  #   register: license_info_set
+  #   # no_log: true
 
 
   - name: License Horizon
