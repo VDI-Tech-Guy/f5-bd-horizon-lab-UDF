@@ -52,6 +52,25 @@
     register: license_info
     # no_log: true
 
+  - name: Horizon License Activate
+    ansible.builtin.uri:
+      url: "https://{{ ansible_host }}/rest/config/v1/licenses/action/validate"
+      method: POST
+      body: 
+        license_key: "{{ horizon_license }}"
+        license_mode: "DEFAULT"
+        expires: 0
+      headers:
+        Authorization: "Bearer {{ login_info.json.access_token }}"
+        Content-Type: application/json
+      status_code: 204, 201, 200
+      timeout: 300
+      body_format: json
+      validate_certs: false
+    delegate_to: localhost
+    register: license_info_set
+    # no_log: true
+
   # - name: debug
   #   ansible.builtin.debug:
   #     var: login_info
