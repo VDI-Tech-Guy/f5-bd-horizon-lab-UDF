@@ -35,29 +35,29 @@
   #   # no_log: true
 
 
-  - name: License Horizon
-    ansible.builtin.uri:
-      url: "https://{{ ansible_host }}/rest/config/v2/licenses"
-      method: POST
-      body: 
-        license_key: "{{ horizon_license }}"
-      headers:
-        Authorization: "Bearer {{ login_info.json.access_token }}"
-        Content-Type: application/json
-      status_code: 204, 201, 200
-      timeout: 300
-      body_format: json
-      validate_certs: false
-    delegate_to: localhost
-    register: license_info
-    # no_log: true
+  # - name: License Horizon
+  #   ansible.builtin.uri:
+  #     url: "https://{{ ansible_host }}/rest/config/v2/licenses"
+  #     method: POST
+  #     body: 
+  #       license_key: "{{ horizon_license }}"
+  #     headers:
+  #       Authorization: "Bearer {{ login_info.json.access_token }}"
+  #       Content-Type: application/json
+  #     status_code: 204, 201, 200
+  #     timeout: 300
+  #     body_format: json
+  #     validate_certs: false
+  #   delegate_to: localhost
+  #   register: license_info
+  #   # no_log: true
 
   - name: Horizon License Activate
     ansible.builtin.uri:
       url: "https://{{ ansible_host }}/rest/config/v1/licenses/action/validate"
       method: POST
       body: 
-        license_key: "M148L-XXXXX-XXXXX-XXXXX-CDFHM"
+        license_key: "{{ horizon_license }}"
         license_mode: "DEFAULT"
         expires: 0
       headers:
