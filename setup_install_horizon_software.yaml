@@ -24,6 +24,7 @@
     - { role: roles/Horizon-Roles/find_files}
     - { role: roles/Horizon-Roles/copy_files}
     - { role: roles/Horizon-Roles/install_horizon}
+    - { role: roles/Horizon-Roles/agent_add_rd_users}
     - { role: roles/date-time}
 
 - hosts: connection_servers
