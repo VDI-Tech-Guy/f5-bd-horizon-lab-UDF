@@ -55,5 +55,6 @@
     - { role: roles/Horizon-Roles/rest_api/create_rds_pool}
     # - { role: roles/Horizon-Roles/rest_api/create_apps}
     # - { role: roles/Horizon-Roles/rest_api/get_app_info}
+    - { role: roles/Horizon-Roles/rest_api/get_pool_info}
     - { role: roles/Horizon-Roles/rest_api/set_entitlement}
     - { role: roles/date-time}
