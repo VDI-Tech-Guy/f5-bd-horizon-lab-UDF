@@ -9,7 +9,3 @@
     - name: Test connectivity to Windows hosts
       win_ping:
       when: inventory_hostname != "big-ip"
-
-    - name: Test ALL Servers Ping to F5
-      win_ping: 
-        hostname: "10.1.1.4" 
