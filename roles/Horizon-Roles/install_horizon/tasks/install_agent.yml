@@ -14,7 +14,7 @@
  - name: Find Horizon Agent Install File
    ansible.windows.win_find:
      paths: c:\tools\
-     patterns: 'VMware-Horizon-Agent*.exe'
+     patterns: 'Omnissa-Horizon-Agent*.exe'
    register: ag_install
 
  - debug:

@@ -4,7 +4,7 @@
  - name: Find Connection Server Install File
    ansible.windows.win_find:
      paths: c:\tools\
-     patterns: 'VMware-Horizon-Connection*.exe'
+     patterns: 'Omnissa-Horizon-Connection*.exe'
    register: cs_install
    until: cs_install.failed == false 
    retries: 10
