@@ -1,11 +1,13 @@
 ---
-# tasks file for Create-VM
 
  - name: Install RDS Server
    ansible.windows.win_feature:
      name: RDS-RD-Server
      state: present
    register: install_rds
+   retries: 10
+   delay: 5
+   until: install_rds is not failed
 
 ##Set-RDLicenseConfiguration -LicenseServer server1 -Mode PerUser 
  - name: Agent Reboot
