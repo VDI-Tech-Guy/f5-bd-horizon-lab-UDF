@@ -1,45 +1,45 @@
 ---
 
-  - name: Copy Locked.Properties file to folder
-    win_copy: 
-      src: "{{ role_path }}/files/broker1.properties"
-      dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
-    become: true
-    become_method: runas
-    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-    vars:
-      ansible_become_user: "{{ansible_user}}"
-      ansible_become_pass: "{{ansible_password}}"
-      ansible_winrm_kerberos_delegation: True
-    when: "'1' in inventory_hostname"
+- name: Copy Locked.Properties file to folder
+  ansible.windows.win_copy:
+    src: "{{ role_path }}/files/broker1.properties"
+    dest: "c:\\Program Files\\Omnissa\\Horizon\\Server\\sslgateway\\conf\\locked.properties"
+  become: true
+  become_method: ansible.builtin.runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ ansible_user }}"
+    ansible_become_pass: "{{ ansible_password }}"
+    ansible_winrm_kerberos_delegation: true
+  when: "'1' in inventory_hostname"
 
-  - name: Copy Locked.Properties file to folder
-    win_copy: 
-      src: "{{ role_path }}/files/broker2.properties"
-      dest: "c:\\Program Files\\VMware\\VMware View\\Server\\sslgateway\\conf\\locked.properties"
-    become: true
-    become_method: runas
-    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
-    vars:
-      ansible_become_user: "{{ansible_user}}"
-      ansible_become_pass: "{{ansible_password}}"
-      ansible_winrm_kerberos_delegation: True
-    when: "'2' in inventory_hostname"
+- name: Copy Locked.Properties file to folder
+  ansible.windows.win_copy:
+    src: "{{ role_path }}/files/broker2.properties"
+    dest: "c:\\Program Files\\Omnissa\\Horizon\\Server\\sslgateway\\conf\\locked.properties"
+  become: true
+  become_method: ansible.builtin.runas
+  become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+  vars:
+    ansible_become_user: "{{ ansible_user }}"
+    ansible_become_pass: "{{ ansible_password }}"
+    ansible_winrm_kerberos_delegation: true
+  when: "'2' in inventory_hostname"
 
-  - name: Stop Horizon Services
-    ansible.windows.win_service:
-      name: wsbroker
-      state: stopped
+- name: Stop Horizon Services
+  ansible.windows.win_service:
+    name: wsbroker
+    state: stopped
 
-  - name: Start Horizon Services
-    ansible.windows.win_service:
-      name: wsbroker
-      state: started
+- name: Start Horizon Services
+  ansible.windows.win_service:
+    name: wsbroker
+    state: started
 
-  - name: Pause/Wait 
-    ansible.builtin.debug:
-      msg: "Wait 5 minutes for Broker to startup"
+- name: Pause/Wait
+  ansible.builtin.debug:
+    msg: "Wait 5 minutes for Broker to startup"
 
-  - name: Pause
-    pause:
-      minutes: 5
+- name: Pause
+  ansible.builtin.pause:
+    minutes: 5
